@@ -1,0 +1,324 @@
+boot.S
+[   0:7c00] => 0x7c00:	cli    
+0x00007c00 in ?? ()
+[   0:7c01] => 0x7c01:	cld    
+0x00007c01 in ?? ()
+[   0:7c02] => 0x7c02:	xor    %eax,%eax
+0x00007c02 in ?? ()
+[   0:7c04] => 0x7c04:	mov    %eax,%ds
+0x00007c04 in ?? ()
+[   0:7c06] => 0x7c06:	mov    %eax,%es
+0x00007c06 in ?? ()
+[   0:7c08] => 0x7c08:	mov    %eax,%ss
+0x00007c08 in ?? ()
+[   0:7c0a] => 0x7c0a:	in     $0x64,%al
+0x00007c0a in ?? ()
+[   0:7c0c] => 0x7c0c:	test   $0x2,%al
+0x00007c0c in ?? ()
+[   0:7c0e] => 0x7c0e:	jne    0x7c0a
+0x00007c0e in ?? ()
+[   0:7c10] => 0x7c10:	mov    $0xd1,%al
+0x00007c10 in ?? ()
+[   0:7c12] => 0x7c12:	out    %al,$0x64
+0x00007c12 in ?? ()
+[   0:7c14] => 0x7c14:	in     $0x64,%al
+0x00007c14 in ?? ()
+[   0:7c16] => 0x7c16:	test   $0x2,%al
+0x00007c16 in ?? ()
+[   0:7c18] => 0x7c18:	jne    0x7c14
+0x00007c18 in ?? ()
+[   0:7c1a] => 0x7c1a:	mov    $0xdf,%al
+0x00007c1a in ?? ()
+[   0:7c1c] => 0x7c1c:	out    %al,$0x60
+0x00007c1c in ?? ()
+[   0:7c1e] => 0x7c1e:	lgdtl  (%esi)
+0x00007c1e in ?? ()
+[   0:7c23] => 0x7c23:	mov    %cr0,%eax
+0x00007c23 in ?? ()
+[   0:7c26] => 0x7c26:	or     $0x1,%ax
+0x00007c26 in ?? ()
+[   0:7c2a] => 0x7c2a:	mov    %eax,%cr0
+0x00007c2a in ?? ()
+[   0:7c2d] => 0x7c2d:	ljmp   $0xb866,$0x87c32
+0x00007c2d in ?? ()
+The target architecture is assumed to be i386
+=> 0x7c32:	mov    $0x10,%ax
+0x00007c32 in ?? ()
+=> 0x7c36:	mov    %eax,%ds
+0x00007c36 in ?? ()
+=> 0x7c38:	mov    %eax,%es
+0x00007c38 in ?? ()
+=> 0x7c3a:	mov    %eax,%fs
+0x00007c3a in ?? ()
+=> 0x7c3c:	mov    %eax,%gs
+0x00007c3c in ?? ()
+=> 0x7c3e:	mov    %eax,%ss
+0x00007c3e in ?? ()
+=> 0x7c40:	mov    $0x7c00,%esp
+0x00007c40 in ?? ()
+=> 0x7c45:	call   0x7d15
+0x00007c45 in ?? ()
+
+bootmain()
+=> 0x7d15:	push   %ebp
+0x00007d15 in ?? ()
+=> 0x7d16:	mov    %esp,%ebp
+0x00007d16 in ?? ()
+=> 0x7d18:	push   %esi
+0x00007d18 in ?? ()
+=> 0x7d19:	push   %ebx
+0x00007d19 in ?? ()
+=> 0x7d1a:	push   $0x0
+0x00007d1a in ?? ()
+=> 0x7d1c:	push   $0x1000
+0x00007d1c in ?? ()
+=> 0x7d21:	push   $0x10000
+0x00007d21 in ?? ()
+=> 0x7d26:	call   0x7cdc
+0x00007d26 in ?? ()
+
+readseg()
+=> 0x7cdc:	push   %ebp
+0x00007cdc in ?? ()
+=> 0x7cdd:	mov    %esp,%ebp
+0x00007cdd in ?? ()
+=> 0x7cdf:	push   %edi
+0x00007cdf in ?? ()
+=> 0x7ce0:	push   %esi
+0x00007ce0 in ?? ()
+=> 0x7ce1:	mov    0x10(%ebp),%edi
+0x00007ce1 in ?? ()
+=> 0x7ce4:	push   %ebx
+0x00007ce4 in ?? ()
+=> 0x7ce5:	mov    0xc(%ebp),%esi
+0x00007ce5 in ?? ()
+=> 0x7ce8:	mov    0x8(%ebp),%ebx
+0x00007ce8 in ?? ()
+=> 0x7ceb:	shr    $0x9,%edi
+0x00007ceb in ?? ()
+=> 0x7cee:	add    %ebx,%esi
+0x00007cee in ?? ()
+=> 0x7cf0:	inc    %edi
+0x00007cf0 in ?? ()
+=> 0x7cf1:	and    $0xfffffe00,%ebx
+0x00007cf1 in ?? ()
+=> 0x7cf7:	cmp    %esi,%ebx
+0x00007cf7 in ?? ()
+=> 0x7cf9:	jae    0x7d0d
+0x00007cf9 in ?? ()
+=> 0x7cfb:	push   %edi
+0x00007cfb in ?? ()
+=> 0x7cfc:	push   %ebx
+0x00007cfc in ?? ()
+=> 0x7cfd:	inc    %edi
+0x00007cfd in ?? ()
+=> 0x7cfe:	add    $0x200,%ebx
+0x00007cfe in ?? ()
+=> 0x7d04:	call   0x7c7c
+0x00007d04 in ?? ()
+
+readsect()
+=> 0x7c7c:	push   %ebp
+0x00007c7c in ?? ()
+=> 0x7c7d:	mov    %esp,%ebp
+0x00007c7d in ?? ()
+=> 0x7c7f:	push   %edi
+0x00007c7f in ?? ()
+=> 0x7c80:	mov    0xc(%ebp),%ecx
+0x00007c80 in ?? ()
+=> 0x7c83:	call   0x7c6a
+0x00007c83 in ?? ()
+#waitdisk()
+=> 0x7c6a:	push   %ebp
+0x00007c6a in ?? ()
+=> 0x7c6b:	mov    $0x1f7,%edx
+0x00007c6b in ?? ()
+=> 0x7c70:	mov    %esp,%ebp
+0x00007c70 in ?? ()
+=> 0x7c72:	in     (%dx),%al
+0x00007c72 in ?? ()
+=> 0x7c73:	and    $0xffffffc0,%eax
+0x00007c73 in ?? ()
+=> 0x7c76:	cmp    $0x40,%al
+0x00007c76 in ?? ()
+=> 0x7c78:	jne    0x7c72
+0x00007c78 in ?? ()
+=> 0x7c7a:	pop    %ebp
+0x00007c7a in ?? ()
+=> 0x7c7b:	ret    
+0x00007c7b in ?? ()
+#readsect()
+=> 0x7c88:	mov    $0x1,%al
+0x00007c88 in ?? ()
+=> 0x7c8a:	mov    $0x1f2,%edx
+0x00007c8a in ?? ()
+=> 0x7c8f:	out    %al,(%dx)
+0x00007c8f in ?? ()
+=> 0x7c90:	mov    $0x1f3,%edx
+0x00007c90 in ?? ()
+=> 0x7c95:	mov    %cl,%al
+0x00007c95 in ?? ()
+=> 0x7c97:	out    %al,(%dx)
+0x00007c97 in ?? ()
+=> 0x7c98:	mov    %ecx,%eax
+0x00007c98 in ?? ()
+=> 0x7c9a:	mov    $0x1f4,%edx
+0x00007c9a in ?? ()
+=> 0x7c9f:	shr    $0x8,%eax
+0x00007c9f in ?? ()
+=> 0x7ca2:	out    %al,(%dx)
+0x00007ca2 in ?? ()
+=> 0x7ca3:	mov    %ecx,%eax
+0x00007ca3 in ?? ()
+=> 0x7ca5:	mov    $0x1f5,%edx
+0x00007ca5 in ?? ()
+=> 0x7caa:	shr    $0x10,%eax
+0x00007caa in ?? ()
+=> 0x7cad:	out    %al,(%dx)
+0x00007cad in ?? ()
+=> 0x7cae:	mov    %ecx,%eax
+0x00007cae in ?? ()
+=> 0x7cb0:	mov    $0x1f6,%edx
+0x00007cb0 in ?? ()
+=> 0x7cb5:	shr    $0x18,%eax
+0x00007cb5 in ?? ()
+=> 0x7cb8:	or     $0xffffffe0,%eax
+0x00007cb8 in ?? ()
+=> 0x7cbb:	out    %al,(%dx)
+0x00007cbb in ?? ()
+=> 0x7cbc:	mov    $0x20,%al
+0x00007cbc in ?? ()
+=> 0x7cbe:	mov    $0x1f7,%edx
+0x00007cbe in ?? ()
+=> 0x7cc3:	out    %al,(%dx)
+0x00007cc3 in ?? ()
+=> 0x7cc4:	call   0x7c6a
+0x00007cc4 in ?? ()
+#waitdisk()
+=> 0x7c6a:	push   %ebp
+0x00007c6a in ?? ()
+=> 0x7c6b:	mov    $0x1f7,%edx
+0x00007c6b in ?? ()
+=> 0x7c70:	mov    %esp,%ebp
+0x00007c70 in ?? ()
+=> 0x7c72:	in     (%dx),%al
+0x00007c72 in ?? ()
+=> 0x7c73:	and    $0xffffffc0,%eax
+0x00007c73 in ?? ()
+=> 0x7c76:	cmp    $0x40,%al
+0x00007c76 in ?? ()
+=> 0x7c78:	jne    0x7c72
+0x00007c78 in ?? ()
+=> 0x7c7a:	pop    %ebp
+0x00007c7a in ?? ()
+=> 0x7c7b:	ret    
+0x00007c7b in ?? ()
+#readsect()
+=> 0x7cc9:	mov    0x8(%ebp),%edi
+0x00007cc9 in ?? ()
+=> 0x7ccc:	mov    $0x80,%ecx
+0x00007ccc in ?? ()
+=> 0x7cd1:	mov    $0x1f0,%edx
+0x00007cd1 in ?? ()
+=> 0x7cd6:	cld    
+0x00007cd6 in ?? ()
+=> 0x7cd7:	repnz insl (%dx),%es:(%edi)
+0x00007cd7 in ?? ()
+=> 0x7cd7:	repnz insl (%dx),%es:(%edi)
+0x00007cd7 in ?? ()
+ecx            0x7f	127
+=> 0x7cd9:	pop    %edi
+0x00007cd9 in ?? ()
+=> 0x7cda:	pop    %ebp
+0x00007cda in ?? ()
+=> 0x7cdb:	ret    
+0x00007cdb in ?? ()
+
+readseg()
+=> 0x7d09:	pop    %eax
+0x00007d09 in ?? ()
+=> 0x7d0a:	pop    %edx
+0x00007d0a in ?? ()
+=> 0x7d0b:	jmp    0x7cf7
+0x00007d0b in ?? ()
+=> 0x7cf7:	cmp    %esi,%ebx
+0x00007cf7 in ?? ()
+=> 0x7cf9:	jae    0x7d0d
+0x00007cf9 in ?? ()
+=> 0x7cfb:	push   %edi
+0x00007cfb in ?? ()
+=> 0x7cfc:	push   %ebx
+0x00007cfc in ?? ()
+=> 0x7cfd:	inc    %edi
+0x00007cfd in ?? ()
+=> 0x7cfe:	add    $0x200,%ebx
+0x00007cfe in ?? ()
+=> 0x7d04:	call   0x7c7c
+0x00007d04 in ?? ()
+...
+=> 0x7d0d:	lea    -0xc(%ebp),%esp
+0x00007d0d in ?? ()
+=> 0x7d10:	pop    %ebx
+0x00007d10 in ?? ()
+=> 0x7d11:	pop    %esi
+0x00007d11 in ?? ()
+=> 0x7d12:	pop    %edi
+0x00007d12 in ?? ()
+=> 0x7d13:	pop    %ebp
+0x00007d13 in ?? ()
+=> 0x7d14:	ret    
+0x00007d14 in ?? ()
+
+bootmain()
+=> 0x7d2b:	add    $0xc,%esp
+0x00007d2b in ?? ()
+=> 0x7d2e:	cmpl   $0x464c457f,0x10000
+0x00007d2e in ?? ()
+=> 0x7d38:	jne    0x7d71
+0x00007d38 in ?? ()
+=> 0x7d3a:	mov    0x1001c,%eax
+0x00007d3a in ?? ()
+=> 0x7d3f:	movzwl 0x1002c,%esi
+0x00007d3f in ?? ()
+=> 0x7d46:	lea    0x10000(%eax),%ebx
+0x00007d46 in ?? ()
+=> 0x7d4c:	shl    $0x5,%esi
+0x00007d4c in ?? ()
+=> 0x7d4f:	add    %ebx,%esi
+0x00007d4f in ?? ()
+=> 0x7d51:	cmp    %esi,%ebx
+0x00007d51 in ?? ()
+=> 0x7d53:	jae    0x7d6b
+0x00007d53 in ?? ()
+=> 0x7d55:	pushl  0x4(%ebx)
+0x00007d55 in ?? ()
+=> 0x7d58:	pushl  0x14(%ebx)
+0x00007d58 in ?? ()
+=> 0x7d5b:	add    $0x20,%ebx
+0x00007d5b in ?? ()
+=> 0x7d5e:	pushl  -0x14(%ebx)
+0x00007d5e in ?? ()
+=> 0x7d61:	call   0x7cdc
+0x00007d61 in ?? ()
+
+readseg()
+Breakpoint 3 at 0x7d62
+Breakpoint 4 at 0x7d63
+Breakpoint 5 at 0x7d64
+Breakpoint 6 at 0x7d65
+Breakpoint 7 at 0x7d66
+Breakpoint 8 at 0x7d67
+Breakpoint 9 at 0x7d68
+Breakpoint 10 at 0x7d69
+Breakpoint 11 at 0x7d6a
+Breakpoint 12 at 0x7d6b
+Continuing.
+=> 0x7d0d:	lea    -0xc(%ebp),%esp
+Breakpoint 2, 0x00007d0d in ?? ()
+=> 0x7d65:	incl   -0x1914f33c(%ebx)
+Breakpoint 6, 0x00007d65 in ?? ()
+=> 0x7d6b:	call   *0x10018
+Breakpoint 12, 0x00007d6b in ?? ()
+
+Detaching from program: , Remote target
+Ending remote debugging.
